@@ -30,27 +30,11 @@ var albumMarconi = {
      ]
 };
 
-// Assignment 11 - add new example album
-var albumChristmas = {
-     title: 'Christmas on the Prairie',
-     artist: 'Various Artists',
-     label: 'Sony',
-     year: '2016',
-     albumArtUrl: 'assets/images/album_covers/10.png',
-     songs: [
-         { title: 'Winter Wonderland', duration: '3:01' },
-         { title: 'Jingle Bells', duration: '4:01' },
-         { title: 'Country Christmas', duration: '2:21'},
-         { title: 'The First Noel', duration: '3:14' },
-         { title: 'Let it Snow', duration: '2:15'}
-     ]
-};
-
 // generates song row content
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number">' + songNumber + '</td>'
+      + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
@@ -59,16 +43,15 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
 };
 
-// Select elements that we want to populate with the text dynamically
-var albumTitle = document.getElementsByClassName('album-view-title')[0];
-var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-var albumImage = document.getElementsByClassName('album-cover-art')[0];
-var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
-
 // set the current album
 var setCurrentAlbum = function(album) {
-
+    // Select elements that we want to populate with the text dynamically
+    var albumTitle = document.getElementsByClassName('album-view-title')[0];
+    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+    var albumImage = document.getElementsByClassName('album-cover-art')[0];
+    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    
      // Assign values to each part of the album
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -84,17 +67,23 @@ var setCurrentAlbum = function(album) {
      }
  };
  
+ var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+ var songRows = document.getElementsByClassName('album-view-song-item');
+ var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
-     // Assignment 11 - add addEventListener to toggle between 3 albums
-     var albumList = [albumPicasso, albumMarconi, albumChristmas];
-     var index = 1;
-     albumImage.addEventListener("click",function() {
-         setCurrentAlbum(albumList[index]);
-         index++;
-         if (index == albumList.length) {
-             index = 0;
+     songListContainer.addEventListener('mouseover', function(event) {
+         // Only target individual song rows during event delegation
+         if (event.target.parentElement.className === 'album-view-song-item') {
+             event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
          }
-     })
+     });
+     for (var i = 0; i < songRows.length; i++) {
+         songRows[i].addEventListener('mouseleave', function(event) {
+             // Selects first child element, which is the song-item-number element
+             this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+         });
+     }
  };
 
