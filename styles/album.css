@@ -44,13 +44,14 @@ body.album {
  
  .album-view-song-item {
      height: 3rem;
-     /* #1 */
+     /* border on bottom only and changing opacity to 0.5 for transparency */
      border-bottom: 1px solid rgba(255,255,255,0.5);
  }
  
  .song-item-number {
      width: 5%;
-     min-width: 30px;
+     min-width: 30px;   /* add a minimum width to .song-item-number to account for the width of the button */
+                        /* without a minimum width, the cell has the potential to become smaller in width than the size of the button */
  }
  
  .song-item-title {
@@ -61,7 +62,7 @@ body.album {
      width: 5%;
  }
  
- .album-song-button {
+ .album-song-button {       /* add the CSS for the play and pause button */
      text-align: center;
      font-size: 14px;
      background-color: white;
@@ -82,7 +83,7 @@ body.album {
      line-height: 28px;
  }
 
- /* Centered text looks better on smaller devices */
+ /* center the album details text to look better on smaller devices */
  @media (max-width: 640px) and (min-width: 320px) {
      .album-view-details {
          text-align: center;
@@ -93,7 +94,7 @@ body.album {
      }
  }
  
- /* #3 */
+ /* adjust the song list to have spacing around it so that it doesn't meet the edge of small devices */
  @media (max-width: 1024px) and (min-width: 320px) {
     .album-view-song-list {
          position: relative;

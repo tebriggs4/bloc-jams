@@ -1,9 +1,9 @@
 body.collection {
      background-image: url(../assets/images/blurred_backgrounds/blur_bg_2.jpg);
-     background-repeat: no-repeat;
-     background-attachment: fixed;
+     background-repeat: no-repeat; /* if dimensions of collection page > size of the background image, the image will not repeat */
+     background-attachment: fixed; /* fixes the background so that when page scrolls, background image doesn't move up or down with content */
      background-position: center center;
-     background-size: cover;
+     background-size: cover; /* cover scales the image to cover the dimensions of the browser */
  }
  
  .album-covers {

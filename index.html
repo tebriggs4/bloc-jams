@@ -2,7 +2,9 @@
 <html>
     <head>
         <title>Bloc Jams</title>
+        <!-- viewport is virtual window, <meta> indicates how the browser should render the content of the page in the viewport -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- order of these stylesheets is important -->
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300">
         <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" type="text/css" href="styles/normalize.css">
@@ -21,7 +23,7 @@
         <section class="hero-content"> <!-- hero content -->
             <h1 class="hero-title">Turn the music up!</h1>
         </section>
-        <section class="selling-points container clearfix">  <!-- selling points -->
+        <section class="selling-points container clearfix">  <!-- selling points, container for code added to main.css -->
             <div class="point column third">
                 <span class="ion-music-note"></span>
                 <h5 class="point-title">Choose your music</h5>
@@ -38,7 +40,7 @@
                 <p class="point-description">Listen to your music on the go. This streaming service is available on all mobile platforms.</p>
             </div>
         </section>
-        <script src="scripts/utilities.js"></script>
+        <script src="scripts/utilities.js"></script> <!-- <script> tags allow us to define and run JavaScript on a web page -->
         <script src="scripts/landing.js"></script>
     </body>
 </html>

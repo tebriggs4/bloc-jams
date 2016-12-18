@@ -1,4 +1,4 @@
-*, *::before, *::after {
+*, *::before, *::after {  /* * universal selector, before & after create pseudo elements that are first and last child of matched element */
      -moz-box-sizing: border-box;
      -webkit-box-sizing: border-box;
      box-sizing: border-box;
@@ -18,9 +18,9 @@ body {
 .navbar {
     position: relative;
     padding: 0.5rem;
-    /* #1 */
+    /* opacity set to 0.5 instead of 1.0 to make page slightly transparent to reveal the new background */
     background-color: rgba(101,18,95,0.5);
-    /* #2 */
+    /* z-index adds a third dimension of placement, want nav to sit above all adjacent elements */
     z-index: 1;
 }
 
@@ -38,7 +38,7 @@ body {
     right: 0;
     height: 100px;
     color: white;
-    /* #3 */
+    /* removing underline for anchor tag to links on navigation bar */
     text-decoration: none;
 }
  
@@ -48,19 +48,19 @@ body {
     height: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-    /* #4 */
+    /* orients content vertically, centers nav links vertically in their container */
     vertical-align: middle;
     color: white;
     font-size: 0.625rem;
     letter-spacing: 0.05rem;
     font-weight: 700;
     text-transform: uppercase;
-    /* #3 */
+    /* removing underline for anchor tag to links on navigation bar */
     text-decoration: none;
     cursor: pointer;
 }
  
-  /* #5 */
+  /* add hover property to navbar link to change color of link when mouse hovers over it */
 .links-container .navbar-link:hover {
     color: rgb(233,50,117);
 }
@@ -70,36 +70,36 @@ body {
 }
 
 .container {
-     margin: 0 auto;
+     margin: 0 auto;    /* center and create max-width so large screens don't distort selling points info */
      max-width: 64rem;
  }
 
-.container.narrow {
+.container.narrow {  /* new class named narrow on the album-view container that sets a max-width property to the element */
      max-width: 56rem;
  }
 
 /* Medium and small screens (640px) */
  @media (min-width: 640px) {
-     html { font-size: 112%; }
+     html { font-size: 112%; } /* style information */
  }
 
-    .column {
+    .column {                   /* shared class for all columns in the grid system - selling points */
          float: left;
          padding-left: 1rem;
          padding-right: 1rem;
      }
 
 
-     .column.full { width: 100%; }
-     .column.two-thirds { width: 66.7%; }
+     .column.full { width: 100%; }              /* Define additional column classes that divide elements within a container */
+     .column.two-thirds { width: 66.7%; }       /* into full-width, halves, thirds, and fourths: */
      .column.half { width: 50%; }
-     .column.third { width: 33.3%; }
+     .column.third { width: 33.3%; }            /* We added this column width (column third) to selling points section, class point */
      .column.fourth { width: 25%; }
      .column.flow-opposite { float: right; } 
 
  /* Large screens (1024px) */
- @media (min-width: 1024px) {
-   html { font-size: 120%; }
+ @media (min-width: 1024px) {                   /* media queries tailor presentation to specific output devices */
+   html { font-size: 120%; } /* style information */
  }
 
 .clearfix::before,
