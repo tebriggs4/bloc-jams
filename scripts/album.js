@@ -78,11 +78,22 @@ var setCurrentAlbum = function(album) {
  // find parent element by class name, function that keeps traversing the DOM upward until a parent with a specified class name is found
  var findParentByClassName = function(element, targetClass) {
      if (element) {
-        var currentParent = element.parentElement;
-        while (currentParent.className !== null && currentParent.className != targetClass) {
-            currentParent = currentParent.parentElement;
+        if (element.parentElement == null) {
+            return alert("No parent found.");
+        } else {
+            var currentParent = element.parentElement;
+            while (currentParent.className !== null && currentParent.className != targetClass) {
+                currentParent = currentParent.parentElement;
+            }
+            if (currentParent.className == targetClass) {
+                return currentParent;
+            } else {
+                return alert("No parent found with that class name.");
+            }
         }
-        return currentParent;
+            
+     } else {
+         return alert("No element passed in parameter.");
      }
  };
 
