@@ -1,0 +1,193 @@
+.player-bar {
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     height: 200px;                     /* positioned player bar at bottom of window with height of 200px, adding padding to album.css */
+     background-color: rgba(255, 255, 255, 0.3);
+     z-index: 100;
+ }
+ 
+.player-bar a {                         /* style anchor tags on music player */
+     font-size: 1.1rem;
+     vertical-align: middle;
+ }
+
+ .player-bar a,
+ .player-bar a:hover {
+     color: white;
+     cursor: pointer;
+     text-decoration: none;
+ }
+ 
+ .player-bar .container {
+     display: table;
+     padding: 0;
+     width: 90%;
+     min-height: 100%;
+ }
+ 
+ .player-bar .control-group {
+     display: table-cell;
+     vertical-align: middle;
+ }
+ 
+ .player-bar .main-controls {
+     width: 25%;
+     text-align: left;
+     padding-right: 1rem;
+ }
+ 
+.player-bar .main-controls .previous {      /* adjust the position of the icons using margin */
+     margin-right: 16.5%;
+ }
+ 
+ .player-bar .main-controls .play-pause {   /* adjust the position of the icons using margin, adjust size of the icons so easier to see. */
+     margin-right: 15%;
+     font-size: 1.6rem;
+ }
+
+ .player-bar .currently-playing {
+     width: 50%;                        /* want middle group to display wider than the other control groups */
+     text-align: center;
+     position: relative;
+ }
+ 
+ .player-bar .currently-playing .song-name,
+ .player-bar .currently-playing .artist-name,
+ .player-bar .currently-playing .artist-song-mobile {
+     text-align: center;
+     font-size: 0.75rem;
+     margin: 0;
+     position: absolute;
+     width: 100%;
+     font-weight: 300;
+ }
+ 
+ .player-bar .currently-playing .song-name,         /* .artist-song-mobile heading joins the song name and artist in one line */
+ .player-bar .currently-playing .artist-song-mobile {
+     top: 1.1rem;
+ }
+ 
+ .player-bar .currently-playing .artist-name {
+     bottom: 1.1rem;
+ }
+ 
+ .player-bar .currently-playing .artist-song-mobile {   /* style this element so that it only displays on mobile devices */
+     display: none;
+ }
+
+.seek-control {                                     /* seek bar stylings */
+     position: relative;
+     font-size: 0.8rem;
+ }
+ 
+ .seek-control .current-time {
+     position: absolute;
+     top: 0.5rem;
+ }
+ 
+ .seek-control .total-time {
+     position: absolute;
+     right: 0;
+     top: 0.5rem;
+ }
+ 
+ .seek-bar {
+     height: 0.25rem;
+     background-color: rgba(255, 255, 255, 0.3);
+     border-radius: 2px;
+     position: relative;
+     cursor: pointer;
+ }
+ 
+ .seek-bar .fill {                  /* .fill is a static element that appears as a line, for now it has a 36% width so we can see the
+                                       element when we view the page.  It displays the current song's playback progress. */
+     background-color: white;
+     width: 36%;
+     height: 0.25rem;
+     border-radius: 2px;
+ }
+ 
+ .seek-bar .thumb {
+     position: absolute;
+     height: 0.5rem;
+     width: 0.5rem;
+     background-color: white;
+     left: 36%;
+     top: 50%;
+     /* Negative margins account for the size increase and hold the element's position in place so that the change in size
+        doesn't adjust the position of other elements */
+     margin-left: -0.25rem;
+     margin-top: -0.25rem;
+     border-radius: 50%;        /* border-radius to 50%, causing the corners of the element to round out enough to appear circular */
+     cursor: pointer;
+     -webkit-transition: all 100ms ease-in-out;
+        -moz-transition: all 100ms ease-in-out;
+             transition: all 100ms ease-in-out;
+ }
+ 
+ .seek-bar:hover .thumb {       /* we've styled .thumb to increase in size when a user hovers over it so it's easier to click and drag */
+     width: 1.1rem;
+     height: 1.1rem;
+     /* Negative margins account for the size increase and hold the element's position in place so that the change in size
+        doesn't adjust the position of other elements */
+     margin-top: -0.5rem;
+     margin-left: -0.5rem;
+ }
+
+ .player-bar .volume {
+     width: 25%;
+     text-align: right;
+ }
+
+.player-bar .volume .icon {         /* We style the volume icon so that it's easily viewable */
+     font-size: 1.1rem;
+     display: inline-block;
+     vertical-align: middle;
+ }
+ 
+ .player-bar .volume .seek-bar {
+     display: inline-block;
+     width: 5.75rem;
+     vertical-align: middle;
+ }
+
+ /* player bar collapses on itself when viewed on smaller screens, rendering it unusable. We need to change it so that past a certain screen width, the  .control-group elements stack vertically instead of horizontally */
+
+ @media (max-width: 640px) {
+     .player-bar {
+         padding: 1rem;
+         background-color: rgba(0,0,0,0.6); /* We add a semi-transparent black background color to the player bar
+                                                so that the white text stands out better */
+     }
+ 
+     .player-bar .main-controls,
+     .player-bar .currently-playing,
+     .player-bar .volume {
+         display: block;        /* We also change each control group element to  display: block, stacking them vertically */
+         margin: 0 auto;
+         padding: 0;
+         width: 100%;           /* set width: 100%, expanding them to the width of the screen */
+         text-align: center;
+     }
+     
+     .player-bar .main-controls,
+     .player-bar .volume {
+         min-height: 3.5rem;    /* minimum width to ensure they have enough space to display well */
+     }
+     
+     .player-bar .currently-playing {
+         min-height: 2.5rem;    /* minimum width to ensure they have enough space to display well */
+     }
+      
+     .player-bar .artist-name,
+     .player-bar .song-name {
+         display: none;         /* We hide the individual song and artist titles with display: none
+                                    and reveal the compact, single-line version below with display: block */
+     }
+ 
+     .player-bar .currently-playing .artist-song-mobile {
+         display: block;
+     }
+ }

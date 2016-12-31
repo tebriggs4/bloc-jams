@@ -8,6 +8,7 @@
          <link rel="stylesheet" type="text/css" href="styles/normalize.css">
          <link rel="stylesheet" type="text/css" href="styles/main.css">
          <link rel="stylesheet" type="text/css" href="styles/album.css">
+         <link rel="stylesheet" type="text/css" href="styles/player_bar.css">
      </head>
      <body class="album">
          <nav class="navbar"> <!-- nav bar -->
@@ -33,6 +34,45 @@
              <table class="album-view-song-list"> <!-- this is the target parent element when mouseover event is used -->
              </table>
          </main>
+         
+         <section class="player-bar">       <!-- music player bar -->
+             <div class="container">
+                 <div class="control-group main-controls">  <!-- contains play/pause and previous/next buttons -->
+                     <a class="previous">
+                         <span class="ion-skip-backward"></span>    <!-- use <span> tags to display icons that represent the buttons -->
+                     </a>
+                     <a class="play-pause">
+                         <span class="ion-play"></span>             <!-- the play/pause button is initialized with the "play" icon -->
+                     </a>
+                     <a class="next">
+                         <span class="ion-skip-forward"></span>     <!-- use <span> tags to display icons that represent the buttons -->
+                     </a>
+                 </div>
+                 <div class="control-group currently-playing">  <!-- displays currenlty playing song info & song progress -->
+                     <h2 class="song-name">My dumb song</h2>    <!-- each detail has a heading tag, class name, and placeholder information.                                                     .artist-song-mobile heading joins song name & artist in one line.
+                                                                     Style element so that it only displays on mobile devices. -->
+                     <div class="seek-control">
+                         <div class="seek-bar">                 <!-- contain a seek bar to allow the user to jump to any point in the song -->
+                             <div class="fill"></div>           <!-- fill class displays the current song's playback progress -->
+                             <div class="thumb"></div>          <!-- .thumb is a visual marker that makes it easier for users to identify                                                   the end of the .fill element, will style like a small circle -->
+                         </div>
+                         <div class="current-time">2:30</div>   <!-- seek bar displays current playback time & full length duration of song -->
+                         <div class="total-time">4:45</div>
+                     </div>
+                     <h2 class="artist-song-mobile">My dumb song - Fallout Boy</h2>
+                     <h3 class="artist-name">Fallout Boy</h3>
+                 </div>
+                 <div class="control-group volume">              <!-- contains volume control slider -->
+                     <span class="ion-volume-high icon"></span>  <!-- The volume icon visually informs the user that this control adjusts
+                                                                    the volume. We also include another seek bar element so that the user
+                                                                    can adjust the volume as desired -->
+                     <div class="seek-bar">
+                         <div class="fill"></div>
+                         <div class="thumb"></div>
+                     </div>
+                 </div>
+             </div>
+         </section>
          <script src="scripts/album.js"></script> <!-- <script> tags allow us to define and run JavaScript on a web page -->
      </body>
  </html>
