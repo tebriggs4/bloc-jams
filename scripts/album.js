@@ -45,33 +45,39 @@ var createSongRow = function(songNumber, songName, songLength) {
       + '</tr>'
       ;
  
-     return template;
+     return $(template);
 };
 
 // set the current album
 // create a function named setCurrentAlbum that the program calls when the window loads
 var setCurrentAlbum = function(album) {
     // select all HTML elements required to display on the album page
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    // We replace each instance of getElementsByClassName with a jQuery selector and use CSS-style syntax to select the elements
+    // we add a $ to the start of each variable name because they now reference jQuery objects
+    // When a jQuery selector returns a single element, we can access it without array-index syntax. For example,
+    // we can call a jQuery method directly on a selector without recovering the first (and only) item in the array.
+     var $albumTitle = $('.album-view-title');
+     var $albumArtist = $('.album-view-artist');
+     var $albumReleaseInfo = $('.album-view-release-info');
+     var $albumImage = $('.album-cover-art');
+     var $albumSongList = $('.album-view-song-list');
     
      // assign values to each part of the album
-     // the firstChild property identifies the first child node of an element, and nodeValue returns or sets the value of a node
-     albumTitle.firstChild.nodeValue = album.title;
-     albumArtist.firstChild.nodeValue = album.artist;
-     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
-     albumImage.setAttribute('src', album.albumArtUrl);
+     // We call jQuery's text() method to replace the content of the text nodes, instead of setting firstChild.nodeValue
+     $albumTitle.text(album.title);
+     $albumArtist.text(album.artist);
+     $albumReleaseInfo.text(album.year + ' ' + album.label);
+     // We also change the setAttribute() method to jQuery's attr() method, which changes the element attribute using the same arguments
+     $albumImage.attr('src', album.albumArtUrl);
  
-     // clear the album song list HTML to make sure there are no interfering elements
-     albumSongList.innerHTML = '';
+     // clear the album song list HTML to make sure there are no interfering elements with jQuery
+     $albumSongList.empty();
  
      // build list of songs from album JavaScript object 
      // go through all the songs from the specified album object and insert them into the HTML using the innerHTML property
      for (var i = 0; i < album.songs.length; i++) {
-         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+         var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+         $albumSongList.append($newRow);
      }
  };
  
