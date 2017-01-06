@@ -216,6 +216,23 @@ var previousSong = function() {
         
 };
 
+var togglePlayFromPlayerBar = function() {
+    // if a song is paused and the play button is clicked in the player bar, change song numbe cell from play to pause.
+    // change HTML of player bar's button to pause and play the song.
+    var songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    if (currentSoundFile.isPaused()) {
+        songNumberCell.html(pauseButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+        currentSoundFile.play();
+    } else if (currentSoundFile) {
+        // If the song is playing (so a current sound file exist), and the pause button is clicked in the player bar, change
+        // the song number cell from pause to play button, change HTML of player bar's button to play and pause the song.
+        songNumberCell.html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        currentSoundFile.pause();
+    }
+};
+
  // update the text of the <h2> tags in album.html that contain the song name and the artist name.
  var updatePlayerBarSong = function () {
      $('.currently-playing .song-name').text(currentSongFromAlbum.title);
@@ -243,10 +260,12 @@ var previousSong = function() {
  // variables to hold jQuery selectors for the next and previous buttons
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
+ var $playPauseButton = $('.main-controls .play-pause');
 
  $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);   // Add jQuery click event handlers to previous and next song buttons
      $nextButton.click(nextSong);
+     $playPauseButton.click(togglePlayFromPlayerBar);
  });
 
