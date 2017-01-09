@@ -124,7 +124,11 @@
      cursor: pointer;
      -webkit-transition: all 100ms ease-in-out;
         -moz-transition: all 100ms ease-in-out;
-             transition: all 100ms ease-in-out;
+             transition: width 100ms ease-in-out,
+                 height 100ms ease-in-out,
+                 margin-top 100ms ease-in-out,
+                 margin-left 100ms ease-in-out;
+             /* changed from all to width, height, margin-top, margin-left to remove left delay animation on seek bar */
  }
  
  .seek-bar:hover .thumb {       /* we've styled .thumb to increase in size when a user hovers over it so it's easier to click and drag */
