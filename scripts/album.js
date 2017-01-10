@@ -50,7 +50,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      // we need to store the number before the user gets a chance to mouse over the row
      // we could do this with JavaScript, but a simpler solution is to use HTML5 data attributes
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
  
@@ -165,6 +165,28 @@ var setCurrentAlbum = function(album) {
      }
  };
 
+ // function that takes one argument, currentTime and sets the text of the element with the .current-time class to the current time in the song 
+ var setCurrentTimeInPlayer = function(currentTime) {
+    $('.seek-control .current-time').text(currentTime);    
+ };
+
+ // function that takes one argument, totalTime and sets the text of the element with the .total-time class to the duration time in the song 
+ var setTotalTimeInPlayerBar = function(totalTime) {
+    $('.seek-control .total-time').text(totalTime);    
+ };
+
+ // function that takes one argument, timeInSeconds and converts to x:xx format 
+ var filterTimeCode = function(timeInSeconds) {
+     var numInSeconds = parseFloat(timeInSeconds); 
+     var minutes = Math.floor(numInSeconds/60);
+     var seconds = Math.floor(numInSeconds - (minutes * 60));
+     if (seconds < 10) {
+        return(minutes + ":0" + seconds);
+     } else {
+        return(minutes + ":" + seconds);
+     }
+ };
+
  var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
          // we bind() the timeupdate event to currentSoundFile. timeupdate is a custom Buzz event that fires
@@ -174,8 +196,10 @@ var setCurrentAlbum = function(album) {
              // of the song and the getDuration() method for getting the total length of the song. Both values return time in seconds.
              var seekBarFillRatio = this.getTime() / this.getDuration();
              var $seekBar = $('.seek-control .seek-bar');
- 
+             var currentTime = this.getTime();
+              
              updateSeekPercentage($seekBar, seekBarFillRatio);
+             setCurrentTimeInPlayer(filterTimeCode(currentTime));
          });
      }
  };
@@ -280,7 +304,7 @@ var setCurrentAlbum = function(album) {
     }
     
     // Set a new current song
-    setSong(currentSongIndex+1);          // actual song number is index plus 1, set currentlyPlayingSongNumber and currentSongFronAlbum
+    setSong(currentSongIndex+1);          // actual song number is index plus 1, set currentlyPlayingSongNumber and currentSongFromAlbum
     currentSoundFile.play();              // play current song
     updateSeekBarWhileSongPlays();
     
@@ -351,7 +375,9 @@ var togglePlayFromPlayerBar = function() {
      $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
      $('.main-controls .play-pause').html(playerBarPauseButton);    // updates the HTML of the play/pause button
                                                                     // to the content of playerBarPauseButton
- }
+     var totalTime = currentSongFromAlbum.duration;
+     setTotalTimeInPlayerBar(filterTimeCode(totalTime));
+ };
  
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
  var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';

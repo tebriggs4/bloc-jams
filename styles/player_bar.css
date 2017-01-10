@@ -104,7 +104,7 @@
  .seek-bar .fill {                  /* .fill is a static element that appears as a line, for now it has a 36% width so we can see the
                                        element when we view the page.  It displays the current song's playback progress. */
      background-color: white;
-     width: 36%;
+     width: 0%;                     /* changed from 36% to 0% so starts on far left of bar */
      height: 0.25rem;
      border-radius: 2px;
  }
@@ -114,7 +114,7 @@
      height: 0.5rem;
      width: 0.5rem;
      background-color: white;
-     left: 36%;
+     left: 0%;                      /* changed from 36% to 0% so starts on far left of bar */
      top: 50%;
      /* Negative margins account for the size increase and hold the element's position in place so that the change in size
         doesn't adjust the position of other elements */
